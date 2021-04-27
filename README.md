@@ -18,7 +18,23 @@ The list of katas was based on https://technologyconversations.com/2014/03/10/sc
     - the same number if no other requirement is fulfilled
     
 
-- Berlin Clock
+- [Berlin Clock](src/main/scala/BerlinClockKata.scala)
+  
+    The Berlin Clock is composed of four rows of lights and a yellow lamp on the top.
+    - The top yellow light blinks every couple of seconds (on for even seconds, off for odd seconds). 
+      
+    - The top two rows represent hours. The lights on the top row represent five hours each, while the bottom row lamps
+    represent one hour each.
+    - The bottom two rows represent minutes. Again, each third-row lamp represents five minutes, so there are 11 of them.
+    
+    Each bottom row lamp represents one minute.
+    
+    The lamps are switched on from left to right. 
+    - Y = Yellow
+    - R = Red
+    - O = Off
+  
+
 - Prime Factors
 - Tennis Game
 - String Permutations
