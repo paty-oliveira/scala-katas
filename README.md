@@ -35,7 +35,11 @@ The list of katas was based on https://technologyconversations.com/2014/03/10/sc
     - O = Off
   
 
-- Prime Factors
+- [Prime Factors](src/main/scala/PrimeFactorsKata.scala)
+  
+    Compute the factors of a given natural number.
+
+
 - Tennis Game
 - String Permutations
 - Word Wrap
