@@ -40,7 +40,22 @@ The list of katas was based on https://technologyconversations.com/2014/03/10/sc
     Compute the factors of a given natural number.
 
 
-- Tennis Game
+- [Tennis Game](src/main/scala/TennisGameKata.scala)
+  
+    Implement a simple tennis game.
+    
+  **Rules:**
+  - Scores from zero to three points are described as "love", "fifteen", "thirty", and "forty".
+  - If at least three points have been scored by each side and a player has one more point than
+      his opponent, the score of the game is "advantage" for the player in the lead.
+    
+  - If at least three points have been scored by each player, and the score are equal, the score
+      is "deuce".
+    
+  - A game is won by the first player when have at least four points in total, and at least two points
+      more than the opponent.
+
+
 - String Permutations
 - Word Wrap
 - Mars ROver
