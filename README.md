@@ -56,7 +56,11 @@ The list of katas was based on https://technologyconversations.com/2014/03/10/sc
       more than the opponent.
 
 
-- String Permutations
+- [String Permutations](src/main/scala/StringPermutationKata.scala)
+  
+  Create a program that returns all permutations of a given string.
+  
+
 - Word Wrap
 - Mars ROver
 - Bowling Game
