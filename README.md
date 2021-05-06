@@ -61,8 +61,19 @@ The list of katas was based on https://technologyconversations.com/2014/03/10/sc
   Create a program that returns all permutations of a given string.
   
 
-- Word Wrap
-- Mars ROver
+- [Word Wrap](src/main/scala/WordWrapKata.scala)
+  
+  Implement a program that takes two arguments, a string and a column number.  
+  
+  - The function returns a string, but with line breaks inserted at just the right places to make sure that no line
+  is longer than the column number.
+    
+  - Like a word processor, break the line by replacing the last space in a line with newline.
+ 
+  - Solution can assume that no word is longer than the maximum number characters in a line.
+
+
+- Mars Rover
 - Bowling Game
 - Reverse Polish Notation
 
