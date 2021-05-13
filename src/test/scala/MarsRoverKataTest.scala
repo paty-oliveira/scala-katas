@@ -13,8 +13,10 @@ class MarsRoverKataTest extends AnyFunSuite{
 
   test("Rover should accept the starting point and the direction"){
     val p1 = new Point(12, 42)
+    val p2 = new Point(0, 0)
+    val planet = new Planet(p2)
     val direction = "E"
-    val rover = new Rover(p1, direction)
+    val rover = new Rover(p1, direction, planet)
     val expectedXCoordinate = 12
     val expectedYCoordinate = 42
 
@@ -35,8 +37,10 @@ class MarsRoverKataTest extends AnyFunSuite{
 
   test("The rover should be able to move forward in X axis"){
     val p1 = new Point(12, 42)
+    val p2 = new Point(0, 0)
+    val planet = new Planet(p2)
     var direction = "E"
-    val rover = new Rover(p1, direction)
+    val rover = new Rover(p1, direction, planet)
 
     val expectedXCoordinate = 13
     val expectedYCoordinate = 42
@@ -47,7 +51,7 @@ class MarsRoverKataTest extends AnyFunSuite{
     assert(rover.getYLocation == expectedYCoordinate)
 
     direction = "W"
-    val rover2 = new Rover(p1, direction)
+    val rover2 = new Rover(p1, direction, planet)
     rover2.sendCommands(command)
 
     assert(rover2.getXLocation == expectedXCoordinate)
@@ -56,8 +60,10 @@ class MarsRoverKataTest extends AnyFunSuite{
 
   test("The rover should be able to move backward in X axis"){
     val p1 = new Point(12, 42)
+    val p2 = new Point(0, 0)
+    val planet = new Planet(p2)
     var direction = "E"
-    val rover1 = new Rover(p1, direction)
+    val rover1 = new Rover(p1, direction, planet)
 
     val expectedXCoordinate = 11
     val expectedYCoordinate = 42
@@ -68,7 +74,7 @@ class MarsRoverKataTest extends AnyFunSuite{
     assert(rover1.getYLocation == expectedYCoordinate)
 
     direction = "W"
-    val rover2 = new Rover(p1, direction)
+    val rover2 = new Rover(p1, direction, planet)
     rover2.sendCommands(command)
 
     assert(rover2.getXLocation == expectedXCoordinate)
@@ -78,8 +84,10 @@ class MarsRoverKataTest extends AnyFunSuite{
 
   test("The rover should be able to move forward in Y axis"){
     val p1 = new Point(12, 42)
+    val p2 = new Point(0, 0)
+    val planet = new Planet(p2)
     var direction = "N"
-    val rover1 = new Rover(p1, direction)
+    val rover1 = new Rover(p1, direction, planet)
 
     val expectedYCoordinate = 43
     val expectedXCoordinate = 12
@@ -90,7 +98,7 @@ class MarsRoverKataTest extends AnyFunSuite{
     assert(rover1.getYLocation == expectedYCoordinate)
 
     direction = "S"
-    val rover2 = new Rover(p1, direction)
+    val rover2 = new Rover(p1, direction, planet)
     rover2.sendCommands(command)
 
     assert(rover2.getXLocation == expectedXCoordinate)
@@ -99,8 +107,10 @@ class MarsRoverKataTest extends AnyFunSuite{
 
   test("The rover should be able to move backward in Y axis"){
     val p1 = new Point(12, 42)
+    val p2 = new Point(0, 0)
+    val planet = new Planet(p2)
     var direction = "N"
-    val rover1 = new Rover(p1, direction)
+    val rover1 = new Rover(p1, direction, planet)
 
     val expectedYCoordinate = 41
     val expectedXCoordinate = 12
@@ -111,22 +121,65 @@ class MarsRoverKataTest extends AnyFunSuite{
     assert(rover1.getYLocation == expectedYCoordinate)
 
     direction = "S"
-    val rover2 = new Rover(p1, direction)
+    val rover2 = new Rover(p1, direction, planet)
     rover2.sendCommands(command)
 
     assert(rover2.getXLocation == expectedXCoordinate)
     assert(rover2.getYLocation == expectedYCoordinate)
   }
 
-  test("The rover should be able to turn left"){
+  test("Should be able to receive an array of commands to change position and direction"){
     val p1 = new Point(12, 42)
-    val direction = "N"
-    val rover = new Rover(p1, direction)
+    val p2 = new Point(0, 0)
+    val planet = new Planet(p2)
+    val direction = "E"
+    val rover = new Rover(p1, direction, planet)
+    val command = "flf"
 
-    val expectedDirection = "W"
-    val command = "l"
+    val expectedXCoordinate = 13
+    val expectedYCoordinate = 43
     rover.sendCommands(command)
 
-    assert(rover.getDirection == expectedDirection)
+    assert(rover.getXLocation == expectedXCoordinate)
+    assert(rover.getYLocation == expectedYCoordinate)
+  }
+
+  test("Should be able to receive an array of commands to change position"){
+    val p1 = new Point(1, 1)
+    val p2 = new Point(0, 0)
+    val planet = new Planet(p2)
+    val direction = "E"
+    val rover = new Rover(p1, direction, planet)
+    val command = "fff"
+
+    val expectedXCoordinate = 4
+    val expectedYCoordinate = 1
+    rover.sendCommands(command)
+    assert(rover.getXLocation == expectedXCoordinate)
+    assert(rover.getYLocation == expectedYCoordinate)
+  }
+
+  test("Should be able to report NOK if no obstacle was found"){
+    val p1 = new Point(1, 1)
+    val p2 = new Point(3, 3)
+    val planet = new Planet(p2)
+    val direction = "E"
+    val rover = new Rover(p1, direction, planet)
+    val command = "fff"
+    val expectedResponse = "NOK: fff"
+
+    assert(rover.sendCommands(command) == expectedResponse)
+  }
+
+  test("Should be able to report OK if no obstacle was found"){
+    val p1 = new Point(12, 42)
+    val p2 = new Point(3, 3)
+    val planet = new Planet(p2)
+    val direction = "E"
+    val rover = new Rover(p1, direction, planet)
+    val command = "ffffff"
+    val expectedResponse= "OK: ffffff"
+
+    assert(rover.sendCommands(command) == expectedResponse)
   }
 }
