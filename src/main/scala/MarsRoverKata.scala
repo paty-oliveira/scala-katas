@@ -3,27 +3,35 @@ class Point(val x: Int, val y: Int) {
   val coordinateX: Int = x
   val coordinateY: Int = y
 
-  def getCoordinateX: Int = {
+  def getXCoordinate: Int = {
     this.coordinateX
   }
 
-  def getCoordinateY: Int = {
+  def getYCoordinate: Int = {
     this.coordinateY
   }
 }
 
 class Rover(val coordinates: Point, val direction: String, val planetCoordinates: Planet) {
 
-  var coordinateX: Int = coordinates.getCoordinateX
-  var coordinateY: Int = coordinates.getCoordinateY
+  var coordinateX: Int = coordinates.getXCoordinate
+  var coordinateY: Int = coordinates.getYCoordinate
   var orientation: String = direction
   val planet: Planet = planetCoordinates
+  val moveDirection: Map[(String, String), String] = Map(("N", "l") -> "W",
+                                                        ("N", "r") -> "E",
+                                                        ("S", "l") -> "W",
+                                                        ("S", "r") -> "E",
+                                                        ("W", "l") -> "N",
+                                                        ("W", "r") -> "S",
+                                                        ("E", "l") -> "S",
+                                                        ("E", "r") -> "N")
 
-  def getXLocation: Int = {
+  def getXCoordinate: Int = {
     this.coordinateX
   }
 
-  def getYLocation: Int = {
+  def getYCoordinate: Int = {
     this.coordinateY
   }
 
@@ -32,45 +40,56 @@ class Rover(val coordinates: Point, val direction: String, val planetCoordinates
   }
 
   def sendCommands(command: String): String = {
-    val parsedCommands = command.toArray
     var message = "OK: "
 
-    for (command <- parsedCommands) {
-      if (this.orientation == "E" && command == 'f') this.coordinateX += 1
-      if (this.orientation == "E" && command == 'b') this.coordinateX -= 1
-      if (this.orientation == "W" && command == 'f') this.coordinateX += 1
-      if (this.orientation == "W" && command == 'b') this.coordinateX -= 1
-      if (this.orientation == "N" && command == 'f') this.coordinateY += 1
-      if (this.orientation == "N" && command == 'b') this.coordinateY -= 1
-      if (this.orientation == "S" && command == 'f') this.coordinateY += 1
-      if (this.orientation == "S" && command == 'b') this.coordinateY -= 1
-      if (this.orientation == "N" && command == 'l') this.orientation = "W"
-      if (this.orientation == "N" && command == 'r') this.orientation = "E"
-      if (this.orientation == "S" && command == 'l') this.orientation = "W"
-      if (this.orientation == "S" && command == 'r') this.orientation = "E"
-      if (this.orientation == "E" && command == 'l') this.orientation = "S"
-      if (this.orientation == "E" && command == 'r') this.orientation = "N"
-      if (this.orientation == "W" && command == 'l') this.orientation = "N"
-      if (this.orientation == "W" && command == 'r') this.orientation = "S"
+    for (command <- command.toArray) {
+      command.toLower match {
+        case 'f' => moveForward()
+        case 'b' => moveBackward()
+        case 'l' => moveLeft()
+        case 'r' => moveRight()
+      }
     }
-    if (this.coordinateX <= planet.coordinateX || this.coordinateY <= planet.coordinateY){
+    if (this.coordinateX <= this.planet.coordinateX || this.coordinateY <= this.planet.coordinateY){
       message = "NOK: " + command
       return message
     }
     message + command
     }
+
+  def moveForward(): Unit = {
+    this.orientation match {
+      case "N" | "S" => this.coordinateY += 1
+      case "W" | "E" => this.coordinateX += 1
+    }
+  }
+
+  def moveBackward(): Unit = {
+    this.orientation match {
+      case "N" | "S" => this.coordinateY -= 1
+      case "W" | "E" => this.coordinateX -= 1
+    }
+  }
+
+  def moveLeft(): Unit = {
+    this.orientation = moveDirection(this.orientation, "l")
+  }
+
+  def moveRight(): Unit = {
+    this.orientation = moveDirection(this.orientation, "r")
+  }
 }
 
 class Planet(val coordinates: Point) {
 
-  val coordinateX: Int = coordinates.getCoordinateX
-  val coordinateY: Int = coordinates.getCoordinateY
+  val coordinateX: Int = coordinates.getXCoordinate
+  val coordinateY: Int = coordinates.getYCoordinate
 
-  def getXLocation: Int = {
+  def getXCoordinate: Int = {
     this.coordinateX
   }
 
-  def getYLocation: Int = {
+  def getYCoordinate: Int = {
     this.coordinateY
   }
 }
