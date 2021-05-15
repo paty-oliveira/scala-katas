@@ -92,5 +92,22 @@ The list of katas was based on https://technologyconversations.com/2014/03/10/sc
   
 
 
-- Bowling Game
+- [Bowling Game](src/main/scala/BowlingGameKata.scala)
+
+  Count and sum the scores of a bowling game of one player. 
+
+  Scoring rules in:
+
+  - One point is scored for each pin that is knocked over, and when less than all ten pins are knocked down
+  in two rolls in a frame, the frame is scored with the total number of pins knocked down.
+    
+  - When all ten pins are knocked down with either the first or second rolls of a frame, bonus pins are awarded 
+    as follows:
+      - **Strike:** when all ten pins are knocked down on the first roll, the frame receives ten pins plus a bonus 
+    of pinfall on the next two rolls. A strike in the final frame receives two extra rolls for bonus pins.
+  
+      - **Spare:** when a second roll of a frame is needed to knock down all ten pins, the frame receives ten pins plus
+    a bonus of pinfall in the next roll. A spare in the first two rolls in the final frame receives a third roll for
+        bonus pins.
+
 
